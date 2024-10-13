@@ -1,20 +1,24 @@
 from tkinter import Tk, BOTH, Canvas
+from line import *
 
 class Window:
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.root_widget = Tk()
-        self.root_widget.title = 'Window'
-        self.canvas_widget = Canvas(self.root_widget, bg="white", height=height, width=width)
+        self.__root_widget = Tk()
+        self.__root_widget.title = 'Window'
+        self.canvas_widget = Canvas(self.__root_widget, bg="white", height=height, width=width)
         self.canvas_widget.pack()
         self.running = False
-        self.root_widget.protocol("WM_DELETE_WINDOW", self.close())
+        self.__root_widget.protocol("WM_DELETE_WINDOW", self.close())
+        
 
+    def draw_line(self, line):
+        line.draw(self.canvas_widget, fill_color='red')
     
     def redraw(self):
-        self.root_widget.update_idletasks
-        self.root_widget.update()
+        self.__root_widget.update_idletasks
+        self.__root_widget.update()
 
     def close(self):
         self.running = False
