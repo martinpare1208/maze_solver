@@ -8,8 +8,7 @@ class Line:
         
     def draw(self, canvas, fill_color):
         print('Draw is being run')
-        self.__canvas = canvas
-        self.__canvas.create_line(self.__point1.x, self.__point1.y, self.__point2.x, self.__point2.y,  fill=fill_color, width=2)
+        canvas.create_line(self.__point1.x, self.__point1.y, self.__point2.x, self.__point2.y,  fill=fill_color, width=2)
         
         
         
