@@ -1,5 +1,5 @@
 # Maze Solver
-### Current Version v0.1
+### Current Version v0.1.5
 
 This is an automatic maze solver that uses known algorithms to find a the exit. The maze is kind of like a graph therefore algorithms like
 - Depth First Search
@@ -25,11 +25,16 @@ Check if you have it installed
 
 `python -m tkinter`
 
+### Version 0.1.5 Features:
+- BFS algorithm implemented
+  - A refactor maybe in place but the algorithm works.
+  
+
 ### Version 0.1 Features:
 - Click to solve button
 
 ### Upcoming Features:
 - Input to edit rows and columns
-- Add Breadth First Search Algorithm
+- ~~Add Breadth First Search Algorithm~~
 - Color Options
 - Timer
