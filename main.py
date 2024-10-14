@@ -39,7 +39,7 @@ def main():
     cell_size_y = (screen_y - 2 * offset) / num_rows
     win = Window(screen_x, screen_y)
 
-    maze = Maze(offset, offset, num_rows, num_cols, cell_size_x, cell_size_y, win)
+    maze = Maze(offset, offset, num_rows, num_cols, cell_size_x, cell_size_y, win, 10)
     win.wait_for_close()
 
 
