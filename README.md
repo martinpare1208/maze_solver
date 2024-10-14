@@ -36,5 +36,6 @@ Check if you have it installed
 ### Upcoming Features:
 - Input to edit rows and columns
 - ~~Add Breadth First Search Algorithm~~
+- Choose an algorithm
 - Color Options
 - Timer
