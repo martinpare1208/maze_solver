@@ -145,13 +145,12 @@ class Maze:
         
     def _solve_r(self, i, j):
         # List of (row_offset, col_offset) for each direction
-        directions = [(-1, 0), (1, 0), (0, 1), (0, -1)]
         self._animate()
         self._cells[i][j]._visited = True
         if i == self._num_rows - 1 and j == self._num_cols - 1:
             return True
         
-        for direction in directions:
+        for n in range(3):
             
             #Check above
             if i > 0 and self._cells[i - 1][j] and self._cells[i-1][j]._visited == False and self._cells[i-1][j].has_bottom_wall == False and self._cells[i][j].has_top_wall == False:
@@ -180,18 +179,96 @@ class Maze:
                     return True
                 self._cells[i][j].draw_move(self._cells[i][j-1], undo=True)
         return False
-            
-            
-            
-        
-        
-
-            
-            
-            
-            
-
-            
-        
-        
     
+    def _bfs_solve(self, i, j):
+        to_visit = []
+        to_visit.append((i, j))
+        self._cells[i][j]._visited = True
+        hashmap = {
+            (i, j): None
+        }
+        while to_visit:
+            self._animate()
+            square = to_visit.pop(0)
+            i = square[0]
+            j = square[1]
+            self._cells[square[0]][square[1]]._visited = True
+            
+            #explore all possible neighbors
+            
+            #Check above
+            if i > 0 and self._cells[i - 1][j] and self._cells[i-1][j]._visited == False and self._cells[i-1][j].has_bottom_wall == False and self._cells[i][j].has_top_wall == False:
+               if self._bfs_check_goal(i-1, j):
+                   self._cells[i][j].draw_move(self._cells[i - 1][j])
+                   to_visit.append((i - 1, j))
+                   hashmap[(i - 1, j)] = i, j
+                   self._bfs_get_path(hashmap, (i - 1, j))
+                   return
+               hashmap[(i - 1, j)] = i, j
+               to_visit.append((i - 1, j))
+               print(to_visit)
+               self._cells[i][j].draw_move(self._cells[i - 1][j])
+               
+            #Check below
+            if i < self._num_rows - 1 and self._cells[i + 1][j] and self._cells[i + 1][j]._visited == False and self._cells[i+1][j].has_top_wall == False and self._cells[i][j].has_bottom_wall == False:
+                if self._bfs_check_goal(i+1, j):
+                   self._cells[i][j].draw_move(self._cells[i + 1][j])
+                   to_visit.append((i+1, j))
+                   hashmap[(i + 1, j)] = i, j
+                   self._bfs_get_path(hashmap, (i + 1, j))
+                   return
+                hashmap[(i + 1, j)] = i, j
+                to_visit.append((i+1, j))
+                print(to_visit)
+                self._cells[i][j].draw_move(self._cells[i + 1][j])
+
+                
+            #Check right
+            if j < self._num_cols - 1 and self._cells[i][j + 1] and self._cells[i][j + 1]._visited == False and self._cells[i][j + 1].has_left_wall == False and self._cells[i][j].has_right_wall == False:
+                if self._bfs_check_goal(i, j + 1):
+                   self._cells[i][j].draw_move(self._cells[i][j + 1])
+                   to_visit.append((i, j + 1))
+                   hashmap[(i, j + 1)] = i, j
+                   self._bfs_get_path(hashmap, (i, j + 1))
+                   return
+                hashmap[(i, j + 1)] = i, j
+                to_visit.append((i, j + 1))
+                print(to_visit)
+                self._cells[i][j].draw_move(self._cells[i][j+1])
+
+                
+            #Check left
+            if j > 0 and self._cells[i][j - 1] and self._cells[i][j - 1]._visited == False and self._cells[i][j - 1].has_right_wall == False and self._cells[i][j].has_left_wall == False:
+                if self._bfs_check_goal(i, j-1):
+                   self._cells[i][j].draw_move(self._cells[i][j - 1])
+                   to_visit.append((i, j - 1))
+                   hashmap[(i, j - 1)] = i, j
+                   self._bfs_get_path(hashmap, (i, j - 1))
+                   return
+                hashmap[(i, j - 1)] = i, j
+                to_visit.append((i, j - 1))
+                print(to_visit)
+                self._cells[i][j].draw_move(self._cells[i][j - 1])
+            
+
+    def _bfs_check_goal(self, i, j):
+        if i == self._num_rows - 1 and j == self._num_cols - 1:
+            return True
+            
+    def _bfs_get_path(self, map, current_coord):
+        path = []
+        while current_coord is not None:
+            path_to_add = []
+            path_to_add.append(current_coord)
+            current_coord = map[current_coord]
+            path_to_add.append(current_coord)
+            path.append(path_to_add)
+        for each_path in path:
+            print(each_path)
+            if each_path[1] is not None:
+                self._cells[each_path[0][0]][each_path[0][1]].draw_move(self._cells[each_path[1][0]][each_path[1][1]], undo=True)
+            else:
+                return
+        return
+        
+

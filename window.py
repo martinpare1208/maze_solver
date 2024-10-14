@@ -60,5 +60,5 @@ class Window:
 
         
     def button_clicked(self):
-        self._maze.solve()
+        self._maze._bfs_solve(0,0)
     
