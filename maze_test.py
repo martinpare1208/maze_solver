@@ -21,6 +21,12 @@ class Test(unittest.TestCase):
         
         self.assertNotEqual(len(m1._cells), len(m2._cells))
         self.assertNotEqual(len(m1._cells[0]), len(m2._cells[0]))
+    
+    def break_entrance_test(self):
+        m1 = Maze(0,0, 6, 12, 10, 10)
+        self.assertEqual(False, m1._cells[0][0].has_left_wall)
+        self.assertEqual(False, m1._cells[-1][-1].has_right_wall)
+
         
 if __name__ == "__main__":
     unittest.main()
