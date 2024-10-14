@@ -1,6 +1,7 @@
 from tkinter import Tk, BOTH, Canvas, Button
 from line import *
 from cell import *
+from maze import *
 
 class Window:
     def __init__(self, width, height):
@@ -12,6 +13,7 @@ class Window:
         self.canvas_widget.pack(fill=BOTH, expand=1)
         self.running = False
         self.draw_button()
+        self._maze = None
         self.__root_widget.protocol("WM_DELETE_WINDOW", self.close())
         
 
@@ -33,7 +35,7 @@ class Window:
         
     def draw_button(self):
         button = Button( 
-                   text="Click Me", 
+                   text="Click to solve", 
                    command=self.button_clicked,
                    activebackground="blue", 
                    activeforeground="white",
@@ -58,5 +60,5 @@ class Window:
 
         
     def button_clicked(self):
-        print('hello')
+        self._maze.solve()
     

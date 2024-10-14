@@ -41,7 +41,7 @@ def main():
     
     
     maze = Maze(offset, offset, num_rows, num_cols, cell_size_x, cell_size_y, win, 10)
-    maze.solve()
+    win._maze = maze
     win.wait_for_close()
 
 
