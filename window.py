@@ -1,4 +1,4 @@
-from tkinter import Tk, BOTH, Canvas
+from tkinter import Tk, BOTH, Canvas, Button
 from line import *
 from cell import *
 
@@ -11,6 +11,7 @@ class Window:
         self.canvas_widget = Canvas(self.__root_widget, bg="white", height=height, width=width)
         self.canvas_widget.pack(fill=BOTH, expand=1)
         self.running = False
+        self.draw_button()
         self.__root_widget.protocol("WM_DELETE_WINDOW", self.close())
         
 
@@ -29,4 +30,33 @@ class Window:
         while self.running:
             self.redraw()
         print('Window closed.')
+        
+    def draw_button(self):
+        button = Button( 
+                   text="Click Me", 
+                   command=self.button_clicked,
+                   activebackground="blue", 
+                   activeforeground="white",
+                   anchor="center",
+                   bd=3,
+                   bg="lightgray",
+                   cursor="hand2",
+                   disabledforeground="gray",
+                   fg="black",
+                   font=("Arial", 12),
+                   height=2,
+                   highlightbackground="black",
+                   highlightcolor="green",
+                   highlightthickness=2,
+                   justify="center",
+                   overrelief="raised",
+                   padx=10,
+                   pady=5,
+                   width=15,
+                   wraplength=100)
+        button.pack(padx=20, pady=20)
+
+        
+    def button_clicked(self):
+        print('hello')
     
