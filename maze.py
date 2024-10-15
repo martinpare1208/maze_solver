@@ -55,11 +55,11 @@ class Maze:
         if self._win is None:
             return   
         self._win.redraw()
-        time.sleep(0.05)
+        time.sleep(0.02)
         
     def _break_entrance_and_exit(self):
-        self._cells[0][0].has_left_wall = False
-        self._cells[-1][-1].has_right_wall = False
+        self._cells[0][0].has_top_wall = False
+        self._cells[-1][-1].has_bottom_wall = False
         self._draw_cell(0,0)
         self._draw_cell(len(self._cells)-1, len(self._cells[0])-1)  
     
@@ -207,7 +207,7 @@ class Maze:
                hashmap[(i - 1, j)] = i, j
                to_visit.append((i - 1, j))
                print(to_visit)
-               self._cells[i][j].draw_move(self._cells[i - 1][j])
+               self._cells[i][j].draw_move(self._cells[i - 1][j], undo=True)
                
             #Check below
             if i < self._num_rows - 1 and self._cells[i + 1][j] and self._cells[i + 1][j]._visited == False and self._cells[i+1][j].has_top_wall == False and self._cells[i][j].has_bottom_wall == False:
@@ -220,7 +220,7 @@ class Maze:
                 hashmap[(i + 1, j)] = i, j
                 to_visit.append((i+1, j))
                 print(to_visit)
-                self._cells[i][j].draw_move(self._cells[i + 1][j])
+                self._cells[i][j].draw_move(self._cells[i + 1][j], undo=True)
 
                 
             #Check right
@@ -234,7 +234,7 @@ class Maze:
                 hashmap[(i, j + 1)] = i, j
                 to_visit.append((i, j + 1))
                 print(to_visit)
-                self._cells[i][j].draw_move(self._cells[i][j+1])
+                self._cells[i][j].draw_move(self._cells[i][j+1], undo=True)
 
                 
             #Check left
@@ -248,7 +248,7 @@ class Maze:
                 hashmap[(i, j - 1)] = i, j
                 to_visit.append((i, j - 1))
                 print(to_visit)
-                self._cells[i][j].draw_move(self._cells[i][j - 1])
+                self._cells[i][j].draw_move(self._cells[i][j - 1], undo=True)
             
 
     def _bfs_check_goal(self, i, j):
@@ -266,10 +266,13 @@ class Maze:
         for each_path in path:
             print(each_path)
             if each_path[1] is not None:
-                self._cells[each_path[0][0]][each_path[0][1]].draw_move(self._cells[each_path[1][0]][each_path[1][1]], undo=True)
+                self._cells[each_path[0][0]][each_path[0][1]].draw_move(self._cells[each_path[1][0]][each_path[1][1]])
             else:
                 return
         return
         
     def reset(self):
-        self._win = None
+        if self._win:
+            self = None
+        else:
+            return

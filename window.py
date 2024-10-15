@@ -1,4 +1,4 @@
-from tkinter import Tk, BOTH, Canvas, Button, OptionMenu, StringVar
+from tkinter import Entry, Label, Tk, BOTH, Canvas, Button, OptionMenu, StringVar
 from line import *
 from cell import *
 from maze import *
@@ -15,13 +15,28 @@ class Window:
         self.running = False
         self.selected_option = StringVar(self.__root_widget)
         self.selected_option.set("Select an Algorithm")
+        self.int_rows = StringVar()
+        self.int_cols = StringVar()
         self.draw_button()
         self.create_options()
+        self.create_int()
         self._maze = None
         self._algorithm = None
         self.__root_widget.protocol("WM_DELETE_WINDOW", self.close())
         
 
+    def create_int(self):
+        rows = self.int_rows
+        cols = self.int_cols
+        label1 = Label(self.__root_widget, text="Enter Rows")
+        label1.pack(pady=5)
+        entry1 = Entry(self.__root_widget, textvariable=rows)
+        entry1.pack(pady=5)
+        label2 = Label(self.__root_widget, text="Enter Columns")
+        label2.pack(pady=5)
+        entry2 = Entry(self.__root_widget, textvariable=cols)
+        entry2.pack(pady=5)
+    
     def draw_line(self, line, fill_color):
         line.draw(self.canvas_widget, fill_color=fill_color)
     
@@ -97,8 +112,11 @@ class Window:
             print(self._maze)
     
     def generate(self):
-        num_rows = 5
-        num_cols = 5
+        if self._maze:
+            self._maze.reset()
+        self.canvas_widget.delete('all')
+        num_rows = int(self.int_rows.get())
+        num_cols = int(self.int_cols.get())
         offset = 50
         screen_x = 800
         screen_y = 600
