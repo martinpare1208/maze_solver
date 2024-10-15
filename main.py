@@ -30,18 +30,17 @@ def main():
     # c4.draw(150, 100, 200, 150)
 
     # c3.draw_move(c4, True)
-    num_rows = 5
-    num_cols = 5
-    offset = 50
-    screen_x = 800
-    screen_y = 600
-    cell_size_x = (screen_x - 2 * offset) / num_cols
-    cell_size_y = (screen_y - 2 * offset) / num_rows
-    win = Window(screen_x, screen_y)
-    
-    
-    maze = Maze(offset, offset, num_rows, num_cols, cell_size_x, cell_size_y, win, 10)
-    win._maze = maze
+    # num_rows = 5
+    # num_cols = 5
+    # offset = 50
+    # screen_x = 800
+    # screen_y = 600
+    # cell_size_x = (screen_x - 2 * offset) / num_cols
+    # cell_size_y = (screen_y - 2 * offset) / num_rows
+    win = Window(800, 600)
+
+    # maze = Maze(offset, offset, num_rows, num_cols, cell_size_x, cell_size_y, win, 10)
+    # win._maze = maze
     win.wait_for_close()
 
 

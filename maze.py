@@ -271,4 +271,5 @@ class Maze:
                 return
         return
         
-
+    def reset(self):
+        self._win = None

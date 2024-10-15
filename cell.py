@@ -1,6 +1,7 @@
 from tkinter import Tk, BOTH, Canvas
 from window import *
 
+
 class Cell:
     def __init__(self, win):
         self.has_left_wall = True
