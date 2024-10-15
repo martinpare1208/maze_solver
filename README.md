@@ -7,23 +7,27 @@ This is an automatic maze solver that uses known algorithms to find a the exit. 
 - A* Algorithm
 - Dijkstra's Algorithm
 
-Requirements
+### Requirements
 
 `Python 3.x`
 
-Installation
+### Installation
 
-Mac
+### Mac
 
 `brew install python-tk`
 
-Linux  
+### Linux  
 
 `sudo apt-get install python3-tk`
 
-Check if you have it installed
+### Check if you have it installed
 
 `python -m tkinter`
+
+### Instructions
+
+`python3 main.py`
 
 ### Version 0.1.5 Features:
 - BFS algorithm implemented
