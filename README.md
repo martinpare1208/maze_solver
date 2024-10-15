@@ -28,14 +28,18 @@ Check if you have it installed
 ### Version 0.1.5 Features:
 - BFS algorithm implemented
   - A refactor maybe in place but the algorithm works.
+  - Added a hashmap to keep track of the best path in BFS
+- Input to edit rows and columns
+- Changed colors to easily distinguish quickest path
+- Choose whichever algorithm you want to use.
   
 
 ### Version 0.1 Features:
 - Click to solve button
 
 ### Upcoming Features:
-- Input to edit rows and columns
+- ~~Input to edit rows and columns~~
 - ~~Add Breadth First Search Algorithm~~
-- Choose an algorithm
+- ~~Choose an algorithm~~
 - Color Options
 - Timer
